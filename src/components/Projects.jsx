@@ -13,36 +13,24 @@ const cards = [
     client: "Dan International Solutions",
     copy: "DAN International Solutions is a premier provider of international recruitment, HR consulting, and workforce management services, headquartered in Dammam, Kingdom of Saudi Arabia. We deliver reliable and customized HR solutions to businesses across Saudi Arabia, UAE, Qatar, Oman, India, Europe, and Africa.",
     color: "bg-black text-white",
-    images: [
-      "/assets/Dan1.png", // CORRECTED PATH
-      "/assets/Dan2.png", // CORRECTED PATH
-      "/assets/Dan3.png", // CORRECTED PATH
-    ],
-    liveProjectUrl: "https://dan-theta-azure.vercel.app/", // Add your live URL here
+    images: ["/assets/Dan1.png", "/assets/Dan2.png", "/assets/Dan3.png"],
+    liveProjectUrl: "https://dan-theta-azure.vercel.app/",
   },
   {
     title: "Resume Builder",
     client: "Resume Builder",
     copy: "AI- Powered Resume Builder : Built with React, TypeSript, Tailwind CSS and Supabase, intigrating Google Gimini AI for smart resume generation with authentication and real-time editing",
     color: "bg-black text-white",
-    images: [
-      "/assets/Resume1.png", // CORRECTED PATH
-      "/assets/Resume2.png", // CORRECTED PATH
-      "/assets/Resume3.png", // CORRECTED PATH
-    ],
-    liveProjectUrl: "https://resume-room.vercel.app/e", //  live URL here
+    images: ["/assets/Resume1.png", "/assets/Resume2.png", "/assets/Resume3.png"],
+    liveProjectUrl: "https://resume-room.vercel.app/e",
   },
   {
     title: "Lead Management System",
     client: "LMS",
     copy: "Designed and implemented the Lead Management System (LMS) to streamline lead tracking and conversion workflows.",
     color: "bg-black text-white",
-    images: [
-      "/assets/Lms1.png", // CORRECTED PATH
-      "/assets/Lms2.png", // CORRECTED PATH
-      "/assets/Lms3.png", // CORRECTED PATH
-    ],
-    liveProjectUrl: "https://aqiblms.com/authentication/sign-in", //  live URL here
+    images: ["/assets/Lms1.png", "/assets/Lms2.png", "/assets/Lms3.png"],
+    liveProjectUrl: "https://aqiblms.com/authentication/sign-in",
   },
   {
     title: "Day2Day Health Care",
@@ -52,35 +40,16 @@ const cards = [
       "Built 'Day2Day Health Care', a post-operative care platform for remote patient monitoring and nurse–patient communication.",
     ],
     color: "bg-black text-white",
-    images: [
-      "/assets/day2day1.png", // CORRECTED PATH
-      "/assets/day2day2.png", // CORRECTED PATH (I assumed you meant a different file name here)
-      "/assets/day2day3.png", // CORRECTED PATH (I assumed you meant a different file name here)
-    ],
-    liveProjectUrl: "http://13.55.35.2:3000/", // Add your live URL here
+    images: ["/assets/day2day1.png", "/assets/day2day2.png", "/assets/day2day3.png"],
+    liveProjectUrl: "http://13.55.35.2:3000/",
   },
 ];
-
-// Helper to get placeholder image - REMOVED: No longer used, but kept for structural integrity
-function getImageUrl(title, colorClass) {
-  const colorMap = {
-    "bg-yellow-300": "FDE047",
-    "bg-black": "171717",
-    "bg-pink-300": "F9A8D4",
-    "bg-green-300": "A7F3D0",
-  };
-  const primaryColorClass =
-    colorClass.split(" ").find((cls) => cls.startsWith("bg-")) || "bg-black";
-  let hex = colorMap[primaryColorClass] || "171717";
-  const textColor = primaryColorClass === "bg-black" ? "F9A8D4" : "000000";
-  return `https://placehold.co/300x500/${hex}/${textColor}/png?text=${title.toUpperCase()}`;
-}
 
 export default function ScrollStack() {
   const bgRef = useRef(null);
 
   useEffect(() => {
-    // Initialize smooth scrolling
+    // Smooth scrolling setup
     const lenis = new Lenis({
       lerp: 0.07,
       smoothWheel: true,
@@ -91,8 +60,9 @@ export default function ScrollStack() {
       ScrollTrigger.update();
       requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf); // === Circular Reveal Transition (white → black) ===
+    requestAnimationFrame(raf);
 
+    // Background reveal
     gsap.set(bgRef.current, {
       clipPath: "circle(0% at 50% 50%)",
       backgroundColor: "#000",
@@ -107,10 +77,11 @@ export default function ScrollStack() {
         end: "top 10%",
         scrub: true,
       },
-    }); // === Scroll Animation for Cards ===
+    });
 
+    // GSAP stacking scroll animation
     const sections = gsap.utils.toArray(".card").reverse();
-    const scrollContainer = document.getElementById("scroll-container-wrapper"); // Increased duration slightly for the larger gap
+    const scrollContainer = document.getElementById("scroll-container-wrapper");
     const stackingScrollDuration = cards.length * 120 + 100;
 
     const masterTl = gsap.timeline({
@@ -125,10 +96,10 @@ export default function ScrollStack() {
 
     sections.forEach((card, i) => {
       const zIndex = 100 + i * 5;
-      const scaleFactor = 1 - (sections.length - 1 - i) * 0.05; // *** MODIFIED: Increased the yOffset multiplier from 30 to 50 for a bigger gap ***
+      const scaleFactor = 1 - (sections.length - 1 - i) * 0.05;
       const yOffset = (sections.length - 1 - i) * 50;
       const cardIndex = sections.length - 1 - i;
-      const startLabel = `cardStart-${cardIndex}`; // Card entrance
+      const startLabel = `cardStart-${cardIndex}`;
 
       masterTl.fromTo(
         card,
@@ -146,7 +117,7 @@ export default function ScrollStack() {
           duration: 1.5,
         },
         i === 0 ? "start" : startLabel
-      ); // Stacking
+      );
 
       if (i < sections.length - 1) {
         const stackLabel = `cardStack-${cardIndex}`;
@@ -164,7 +135,7 @@ export default function ScrollStack() {
         );
         masterTl.addLabel(`cardStart-${cardIndex - 1}`, stackLabel + "+=0.8");
       }
-    }); // Cleanup
+    });
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -180,30 +151,18 @@ export default function ScrollStack() {
         ref={bgRef}
         className="absolute inset-0 z-10 transition-all duration-1000 ease-in-out"
       ></div>
+
       {/* Scroll Content */}
-      <div
-        id="scroll-container-wrapper"
-        className="relative z-20 w-full px-4 md:px-8"
-      >
+      <div id="scroll-container-wrapper" className="relative z-20 w-full px-3 md:px-8">
         <div className="card-viewport h-screen w-full flex items-center justify-center relative">
           {cards
             .slice()
             .reverse()
             .map((card, index) => {
-              // const imageUrl = getImageUrl(card.title, card.color); // Removed
-              // const imageUrl2 = getImageUrl(card.title + " Alt 1", card.color); // Removed
-              // const imageUrl3 = getImageUrl(card.title + " Alt 2", card.color); // Removed
-              
-              const cardDisplayNumber = String(cards.length - index).padStart(
-                2,
-                "0"
-              );
+              const cardDisplayNumber = String(cards.length - index).padStart(2, "0");
               const cardIndex = cards.length - 1 - index;
               const baseZIndex = 10 + index;
-              
-              // Ensure copy is an array for consistent rendering
               const cardCopy = Array.isArray(card.copy) ? card.copy : [card.copy];
-
 
               return (
                 <div
@@ -211,66 +170,56 @@ export default function ScrollStack() {
                   id={`card-${cardIndex + 1}`}
                   style={{ zIndex: baseZIndex }}
                   className={`card absolute top-1/2 left-1/2 transform 
-                    -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl 
-                    h-[70vh] rounded-3xl border-2 border-white p-10 md:p-20 
+                    -translate-x-1/2 -translate-y-1/2 
+                    w-[95vw] sm:w-[95vw] md:w-full max-w-7xl 
+                    h-auto sm:h-[85vh] md:h-[70vh] 
+                    rounded-2xl border border-white 
+                    p-6 sm:p-8 md:p-20 
                     origin-center ${card.color} overflow-hidden shadow-xl`}
                 >
                   {/* Top Bar */}
-                  <div className="flex justify-between items-center h-18">
+                  <div className="flex justify-between items-center flex-wrap gap-2 sm:gap-3 h-18">
                     <div className="text-white flex items-center">
                       <span
-                        className="text-5xl md:text-6xl font-extrabold tracking-tighter"
-                        style={{ marginRight: "1rem" }} // 👈 manual space between number and text
+                        className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tighter mr-2"
                       >
                         {cardDisplayNumber}
                       </span>
-
-                      <div
-                        className="flex flex-col justify-center"
-                        style={{ marginLeft: "0.5rem" }}
-                      >
-                        <span className="text-xs font-semibold tracking-wider uppercase opacity-70 text-gray-400">
-                          PROJECT
-                        </span>
-                        <span className="text-sm md:text-base font-bold tracking-wide uppercase text-white">
-                          {card.client || card.title}
-                        </span>
-                      </div>
+                     
                     </div>
 
-                    {/* LIVE PROJECT Button - Updated to 'a' tag */}
-                    <a 
+                    {/* Live Project */}
+                    <a
                       href={card.liveProjectUrl || "#"}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs w-30 h-7 font-bold tracking-wider uppercase rounded-full px-6 py-2  hover:bg-white hover:text-black transition-colors flex items-center justify-center" // Added border and flex for style consistency
+                      className="text-[10px] sm:text-xs md:text-xs font-bold tracking-wider uppercase rounded-full px-4 py-1 sm:px-6 sm:py-2  hover:bg-white hover:text-black transition-colors flex items-center justify-center"
                     >
                       LIVE PROJECT
                     </a>
                   </div>
 
                   {/* Content */}
-                  <div className="flex flex-col md:flex-row items-center justify-between h-[calc(100%-4rem)] gap-8 pt-2">
-                    <div className="flex-1 text-center md:text-left space-y-4">
-                      <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter">
+                  <div className="flex flex-col md:flex-row items-center justify-between h-auto md:h-[calc(100%-4rem)] gap-4 sm:gap-6 pt-4 sm:pt-2">
+                    <div className="flex-1 text-center md:text-left space-y-3 sm:space-y-4">
+                      <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tighter">
                         {card.title}
                       </h1>
-                      {/* Handle array copy for cleaner display */}
                       {cardCopy.map((copy, idx) => (
-                        <p key={idx} className="max-w-lg text-sm leading-relaxed opacity-90">
+                        <p key={idx} className="max-w-lg text-xs sm:text-sm leading-relaxed opacity-90">
                           {copy}
                         </p>
                       ))}
                     </div>
 
-                    {/* Images - Mapped to use the new card.images array */}
-                    <div className="flex-shrink-0 flex gap-4 overflow-x-auto p-2 md:h-90 w-[80vw] justify-center">
-                      {card.images && card.images.map((imageSrc, imgIdx) => (
+                    {/* Images */}
+                    <div className="flex-shrink-0 flex flex-wrap sm:flex-nowrap gap-3 overflow-x-auto p-2 w-full md:w-[80vw] justify-center">
+                      {card.images.map((imageSrc, imgIdx) => (
                         <img
                           key={imgIdx}
                           src={imageSrc}
                           alt={`${card.title} Screenshot ${imgIdx + 1}`}
-                          className="rounded-2xl shadow-xl w-32 h-32 md:w-80 md:h-80 object-cover border border-gray-700"
+                          className="rounded-xl shadow-xl w-28 h-28 sm:w-40 sm:h-40 md:w-80 md:h-80 object-cover border border-gray-700"
                         />
                       ))}
                     </div>

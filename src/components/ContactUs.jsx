@@ -26,6 +26,15 @@ const customStyles = `
     padding-right: 200px;
   }
 
+  /* ✅ Slower on small screens for smoother readability */
+  @media (max-width: 640px) {
+    .marquee-content {
+      animation-duration: 25s;
+      padding-right: 100px;
+    }
+  }
+
+  /* ✅ Form styles stay same */
   .form-input-style {
     appearance: none;
     background: transparent;
@@ -59,13 +68,13 @@ const MarqueeText = ({ text }) => (
   <div className="marquee-container bg-black">
     <div className="marquee-content">
       <span
-        className="text-8xl sm:text-8xl lg:text-[120px] xl:text-[150px] font-extrabold tracking-tight text-white uppercase"
+        className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] xl:text-[150px] font-extrabold tracking-tight text-white uppercase"
         style={{ letterSpacing: "-0.04em" }}
       >
         {text}
       </span>
       <span
-        className="text-8xl sm:text-9xl lg:text-[120px] xl:text-[150px] font-extrabold tracking-tight text-white uppercase"
+        className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] xl:text-[150px] font-extrabold tracking-tight text-white uppercase"
         style={{ letterSpacing: "-0.04em" }}
       >
         &nbsp;&nbsp;&nbsp;&nbsp;{text}
@@ -154,7 +163,7 @@ const ContactForm = () => {
       <button
         type="submit"
         disabled={state.submitting}
-        className="w-full text-xl sm:text-3xl font-extrabold text-white uppercase mt-20 flex justify-between items-center group border-b-4 border-white pb-1 hover:text-white hover:border-white transition-colors duration-300"
+        className="w-full text-xl sm:text-3xl font-extrabold text-white uppercase mt-20 flex justify-between items-center group border-b-4 border-white pb-1 hover:text-white hover:border-white transition-colors duration-300 cursor-pointer"
       >
         SEND REQUEST
         <svg

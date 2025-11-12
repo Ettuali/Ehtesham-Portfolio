@@ -68,9 +68,8 @@ const TimelineCard = ({ item, i }) => {
   const isLeft = i % 2 === 0;
 
   return (
-    <motion.div
+       <motion.div
       key={i}
-      // 1. Centered layout
       className="timeline-card relative flex justify-center w-full"
       initial={{ opacity: 0, y: 70 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -78,43 +77,45 @@ const TimelineCard = ({ item, i }) => {
       viewport={{ once: true, amount: 0.3 }}
     >
       <motion.div
-        whileHover={{ scale: 1.05 }} // Simplified scale/rotation since the card is centered
+        whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.6 }}
-        // 2. Card Styling: Wider card (60%) and removed padding
-        className="w-[90%] md:w-[60%] min-h-[420px] rounded-3xl
-          bg-gradient-to-br from-[#141414]/80 to-[#1c1c1c]/90 backdrop-blur-xl 
-          shadow-[0_0_30px_rgba(255,255,255,0.2)] relative overflow-hidden transition-all duration-700
-          hover:shadow-[0_0_60px_rgba(255,255,255,0.35)]"
+        className="w-[95%] sm:w-[90%] md:w-[60%] min-h-[400px] rounded-3xl
+          bg-gradient-to-br from-[#141414]/80 to-[#1c1c1c]/90 backdrop-blur-xl
+          shadow-[0_0_30px_rgba(255,255,255,0.15)] relative overflow-hidden 
+          transition-all duration-700 hover:shadow-[0_0_60px_rgba(255,255,255,0.25)]"
       >
         {/* Accent gradient ring - position adjusted for centered card aesthetic */}
         <div
-          className={`absolute w-48 h-48 bg-lime-400/10 rounded-full blur-3xl ${
-            isLeft ? "-left-16 -top-10" : "-right-16 -bottom-10"
+          className={`absolute w-32 h-32 sm:w-40 sm:h-40 bg-lime-400/10 rounded-full blur-3xl ${
+            isLeft ? "-left-10 -top-6" : "-right-10 -bottom-6"
           }`}
         ></div>
 
         {/* 3. Inner Content Block: Uses 'm-4' for the thick black border look, and 'text-center' */}
         <div
-          className="relative z-10 m-4 p-7 md:p-10  bg-transparent space-y-5
-          text-center" // <-- Centers metadata
+          className="relative z-10 m-3 sm:m-5 p-5 sm:p-7 md:p-10 bg-transparent space-y-4 sm:space-y-6 text-center"
         >
-          <h3 className="text-3xl font-bold  mb-3 bg-white bg-clip-text text-transparent leading-snug">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 bg-white bg-clip-text text-transparent leading-snug">
             {item.title}
           </h3>
 
-          <p className="text-lg font-semibold text-gray-300 mb-2">
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg font-semibold text-gray-300 mb-1">
             {item.subtitle}
           </p>
+        {/* Duration */}
+          <p className="text-sm text-gray-500 mb-3">{item.duration}</p>
 
-          <p className="text-sm text-gray-500 mb-4">{item.duration}</p>
-
-          {/* 4. Description Paragraph: Uses 'text-justify' and 'mx-auto' to keep it centered within the box */}
-          <p className="text-gray-400 leading-relaxed text-lg text-justify mx-auto max-w-4xl">
-            {item.description}
-          </p>
+           {/* Description */}
+          <div className="text-gray-400 leading-relaxed text-sm sm:text-base text-left sm:text-justify mx-auto max-w-3xl space-y-3">
+            {item.description.map((desc, idx) => (
+              <p key={idx}>{desc}</p>
+            ))}
+          </div>
         </div>
+        
 
-        {/* Accent underline */}
+         {/* Bottom Accent Line */}
         <span
           className={`absolute bottom-0 left-0 w-0 h-[3px] bg-gradient-to-r from-lime-400 to-emerald-400 transition-all duration-700 hover:w-full`}
         ></span>
