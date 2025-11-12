@@ -31,7 +31,7 @@ const timelineData = [
  {
   title: "Bachelor of Technology - Computer Science Engineering",
   subtitle: "Shadan College of Engineering",
-  duration: "Jul 2019 - Aug 2025",
+  duration: "Jul 2019 - Aug 2023",
   description: [
     "Focused on core subjects including Data Structures, Algorithms, Database Management Systems, and Software Engineering.",
     "Gained hands-on experience in modern web technologies such as React, Node.js, and MySQL through academic and personal projects.",
