@@ -8,7 +8,7 @@ const CyberFiction = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger); 
 
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -82,6 +82,7 @@ const CyberFiction = () => {
         end: "bottom top",
         pin: true,
         scrub: true,
+        // pinSpacing: true,
       });
     });
 

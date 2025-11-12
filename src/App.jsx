@@ -20,11 +20,15 @@ function App() {
 
   const handleEnterSite = () => setIsSiteEntered(true);
 
-  const menuItems = [
-    { label: "Home", ariaLabel: "Go to home", link: "#home" },
-    { label: "Projects", ariaLabel: "Go to projects", link: "#projects" },
-    { label: "Experience", ariaLabel: "Go to experience", link: "#experience" },
-  ];
+const menuItems = [
+  { label: "Home", ariaLabel: "Go to home", href: "#main" },
+  { label: "Projects", ariaLabel: "Go to projects", href: "#projects" },
+  { label: "Skills", ariaLabel: "Go to skills", href: "#skills" },
+  { label: "Experience", ariaLabel: "Go to experience", href: "#experience" },
+  { label: "Contact", ariaLabel: "Go to contact", href: "#contact" },
+];
+
+
 
   const socialItems = [
     { label: "Twitter", link: "https://twitter.com" },
@@ -74,18 +78,26 @@ function App() {
         
 
           {/* --- MAIN CONTENT --- */}
-          <section id="home">
+          <section id="main">
             <CyberFiction />
           </section>
 
-          <Projects />
-          <CinematicHoverEffect />
+          <section id="projects">
+  <Projects />
+</section>
+
+<section id= "skills">
+   <CinematicHoverEffect />
+</section>
+         
 
           <section id="experience">
             <Experience />
           </section>
-
+<section id="contact"
+         >
           <ContactUs />
+          </section> 
 
           <TextPressure />
 

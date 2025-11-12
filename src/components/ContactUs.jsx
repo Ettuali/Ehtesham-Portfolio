@@ -26,7 +26,7 @@ const customStyles = `
     padding-right: 200px;
   }
 
-  /* ✅ Slower on small screens for smoother readability */
+  /*  Slower on small screens for smoother readability */
   @media (max-width: 640px) {
     .marquee-content {
       animation-duration: 25s;
@@ -68,13 +68,13 @@ const MarqueeText = ({ text }) => (
   <div className="marquee-container bg-black">
     <div className="marquee-content">
       <span
-        className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] xl:text-[150px] font-extrabold tracking-tight text-white uppercase"
+        className="text-3xl sm:text-5xl md:text-5xl lg:text-[100px] xl:text-[100px] font-extrabold tracking-tight text-white uppercase"
         style={{ letterSpacing: "-0.04em" }}
       >
         {text}
       </span>
       <span
-        className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] xl:text-[150px] font-extrabold tracking-tight text-white uppercase"
+        className="text-3xl sm:text-5xl md:text-5xl lg:text-[100px] xl:text-[100px] font-extrabold tracking-tight text-white uppercase"
         style={{ letterSpacing: "-0.04em" }}
       >
         &nbsp;&nbsp;&nbsp;&nbsp;{text}
@@ -197,7 +197,7 @@ const ContactUs = () => {
         <div className="flex flex-col lg:flex-row items-start pt-16 gap-12">
           {/* LEFT SIDE */}
           <div className="w-full lg:w-1/2">
-            <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight max-w-xl">
+            <p className="text-3xl sm:text-3xl md:text-5xl font-extrabold leading-tight max-w-xl">
               Let’s build something impactful together. Reach out!
             </p>
 
