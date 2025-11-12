@@ -37,7 +37,7 @@ const timelineData = [
     "Gained hands-on experience in modern web technologies such as React, Node.js, and MySQL through academic and personal projects.",
     "Collaborated on team projects emphasizing clean code practices, scalable architecture, and UI/UX design principles.",
     "Participated in hackathons and coding challenges, strengthening problem-solving and full-stack development skills.",
-    "Built and deployed multiple real-world applications as part of final-year and side projects.",
+   
   ],
 },
 
